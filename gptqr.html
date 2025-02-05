@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner & Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsqr/1.4.0/jsQR.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #qrcode {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYS-D85PNqj5iiZJVaYNyBw56YYID-ndVZPw&s" width="75px"> </h1>
+        <h1> QR Code </h1>
+        <h3>ใส่ลิ้งที่คุณต้องการ Generate(ประมวลผล) เป็น QR Code</h3>
+        <input type="text" id="qrText" placeholder="                   >>>ใส่ลิ้งตรงนี้<<< ">
+        <button onclick="generateQRCode()">สร้าง QR Code</button>
+        <div id="qrcode"></div>
+    </div>
+
+    <script>
+        function generateQRCode() {
+            let qrText = document.getElementById('qrText').value;
+            if (!qrText.trim()) {
+                alert("กรุณาใส่ข้อความก่อนสร้าง QR Code");
+                return;
+            }
+            document.getElementById('qrcode').innerHTML = ''; 
+            let qrContainer = document.createElement("div"); 
+            qrContainer.style.display = "flex";
+            qrContainer.style.justifyContent = "center"; 
+            document.getElementById('qrcode').appendChild(qrContainer);
+
+            new QRCode(qrContainer, {
+                text: qrText,
+                width: 200,
+                height: 200
+            });
+        }
+    </script>
+</body>
+</html>
